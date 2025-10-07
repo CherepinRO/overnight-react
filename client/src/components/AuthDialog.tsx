@@ -9,6 +9,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface AuthDialogProps {
   open: boolean;
@@ -19,6 +20,7 @@ export default function AuthDialog({ open, onOpenChange }: AuthDialogProps) {
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { t } = useTranslation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,12 +36,10 @@ export default function AuthDialog({ open, onOpenChange }: AuthDialogProps) {
       <DialogContent className="sm:max-w-md" data-testid="dialog-auth">
         <DialogHeader>
           <DialogTitle className="text-2xl font-display font-bold">
-            {isSignUp ? 'Create Account' : 'Welcome Back'}
+            {isSignUp ? t('auth.createAccount') : t('auth.welcomeBack')}
           </DialogTitle>
           <DialogDescription>
-            {isSignUp 
-              ? 'Start earning overnight income in minutes' 
-              : 'Sign in to continue to your dashboard'}
+            {isSignUp ? t('auth.signUpSubtitle') : t('auth.signInSubtitle')}
           </DialogDescription>
         </DialogHeader>
         
@@ -57,7 +57,7 @@ export default function AuthDialog({ open, onOpenChange }: AuthDialogProps) {
               <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
               <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
             </svg>
-            Continue with Google
+            {t('auth.continueWithGoogle')}
           </Button>
           
           <div className="relative">
@@ -66,13 +66,13 @@ export default function AuthDialog({ open, onOpenChange }: AuthDialogProps) {
             </div>
             <div className="relative flex justify-center text-xs uppercase">
               <span className="bg-background px-2 text-muted-foreground">
-                Or continue with email
+                {t('auth.orContinueWith')}
               </span>
             </div>
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">{t('auth.email')}</Label>
             <Input
               id="email"
               type="email"
@@ -85,7 +85,7 @@ export default function AuthDialog({ open, onOpenChange }: AuthDialogProps) {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password">{t('auth.password')}</Label>
             <Input
               id="password"
               type="password"
@@ -98,18 +98,18 @@ export default function AuthDialog({ open, onOpenChange }: AuthDialogProps) {
           </div>
           
           <Button type="submit" className="w-full" data-testid="button-submit-auth">
-            {isSignUp ? 'Create Account' : 'Sign In'}
+            {isSignUp ? t('auth.createAccountButton') : t('auth.signIn')}
           </Button>
           
           <p className="text-center text-sm text-muted-foreground">
-            {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
+            {isSignUp ? t('auth.alreadyHaveAccount') : t('auth.dontHaveAccount')}{' '}
             <button
               type="button"
               onClick={() => setIsSignUp(!isSignUp)}
               className="text-primary hover:underline font-medium"
               data-testid="button-toggle-auth-mode"
             >
-              {isSignUp ? 'Sign in' : 'Sign up'}
+              {isSignUp ? t('auth.signInLink') : t('auth.signUp')}
             </button>
           </p>
         </form>

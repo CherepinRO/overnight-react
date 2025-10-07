@@ -1,36 +1,39 @@
 import { Link2, TrendingUp, Wallet } from "lucide-react";
-
-const steps = [
-  {
-    icon: Link2,
-    number: "01",
-    title: "Connect Your Bank",
-    description: "Securely link your bank account using our trusted banking partners. Your credentials are never stored.",
-  },
-  {
-    icon: Wallet,
-    number: "02",
-    title: "Set Your Preferences",
-    description: "Choose how much to invest each night. You can adjust or pause anytime with a single click.",
-  },
-  {
-    icon: TrendingUp,
-    number: "03",
-    title: "Earn Automatically",
-    description: "Wake up to earnings. Our AI optimizes overnight fund allocation for maximum returns every single night.",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 export default function HowItWorks() {
+  const { t } = useTranslation();
+
+  const steps = [
+    {
+      icon: Link2,
+      number: "01",
+      title: t('howItWorks.step1.title'),
+      description: t('howItWorks.step1.description'),
+    },
+    {
+      icon: Wallet,
+      number: "02",
+      title: t('howItWorks.step2.title'),
+      description: t('howItWorks.step2.description'),
+    },
+    {
+      icon: TrendingUp,
+      number: "03",
+      title: t('howItWorks.step3.title'),
+      description: t('howItWorks.step3.description'),
+    },
+  ];
+
   return (
     <section id="how-it-works" className="py-24 bg-card">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="font-display text-4xl lg:text-5xl font-bold text-foreground mb-6" data-testid="text-how-it-works-title">
-            Start Earning in Three Simple Steps
+            {t('howItWorks.title')}
           </h2>
           <p className="text-lg text-muted-foreground" data-testid="text-how-it-works-subtitle">
-            Getting started takes less time than making your morning coffee.
+            {t('howItWorks.subtitle')}
           </p>
         </div>
         

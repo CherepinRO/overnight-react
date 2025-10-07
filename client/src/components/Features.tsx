@@ -1,49 +1,52 @@
 import { Shield, Zap, TrendingUp, Clock, DollarSign, Lock } from "lucide-react";
 import { Card } from "@/components/ui/card";
-
-const features = [
-  {
-    icon: Zap,
-    title: "Instant Setup",
-    description: "Connect your bank account and start earning in under 2 minutes. No paperwork, no hassle.",
-  },
-  {
-    icon: Shield,
-    title: "Bank-Grade Security",
-    description: "Your funds are FDIC insured and protected with military-grade encryption.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Competitive Returns",
-    description: "Earn up to 4.5% APY on overnight deposits, significantly higher than traditional savings.",
-  },
-  {
-    icon: Clock,
-    title: "24/7 Automated",
-    description: "Our system works round the clock, automatically optimizing your returns every night.",
-  },
-  {
-    icon: DollarSign,
-    title: "No Minimum Balance",
-    description: "Start with any amount. Every dollar earns interest from day one.",
-  },
-  {
-    icon: Lock,
-    title: "Always Accessible",
-    description: "Withdraw your funds anytime without penalties or fees. Your money, your control.",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 export default function Features() {
+  const { t } = useTranslation();
+
+  const features = [
+    {
+      icon: Zap,
+      title: t('features.instantSetup.title'),
+      description: t('features.instantSetup.description'),
+    },
+    {
+      icon: Shield,
+      title: t('features.security.title'),
+      description: t('features.security.description'),
+    },
+    {
+      icon: TrendingUp,
+      title: t('features.returns.title'),
+      description: t('features.returns.description'),
+    },
+    {
+      icon: Clock,
+      title: t('features.automated.title'),
+      description: t('features.automated.description'),
+    },
+    {
+      icon: DollarSign,
+      title: t('features.noMinimum.title'),
+      description: t('features.noMinimum.description'),
+    },
+    {
+      icon: Lock,
+      title: t('features.accessible.title'),
+      description: t('features.accessible.description'),
+    },
+  ];
+
   return (
     <section id="features" className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="font-display text-4xl lg:text-5xl font-bold text-foreground mb-6" data-testid="text-features-title">
-            Everything You Need to Grow Your Money
+            {t('features.title')}
           </h2>
           <p className="text-lg text-muted-foreground" data-testid="text-features-subtitle">
-            Powerful features designed to maximize your overnight earnings with minimal effort.
+            {t('features.subtitle')}
           </p>
         </div>
         

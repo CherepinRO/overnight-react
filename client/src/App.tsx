@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Landing from "@/pages/Landing";
 import NotFound from "@/pages/not-found";
 import { useEffect } from "react";
+import "./i18n/config";
 
 function Router() {
   return (

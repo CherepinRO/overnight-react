@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { TrendingUp, Shield, Zap } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
+  const { t } = useTranslation();
+
   return (
     <section className="relative min-h-screen flex items-center pt-16">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-secondary/5 -z-10"></div>
@@ -12,16 +15,16 @@ export default function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
           <div className="space-y-8">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium" data-testid="badge-new-feature">
               <Zap className="w-4 h-4" />
-              <span>Earn while you sleep</span>
+              <span>{t('hero.badge')}</span>
             </div>
             
             <h1 className="font-display text-5xl lg:text-6xl font-bold leading-tight text-foreground" data-testid="text-hero-title">
-              Turn Your Idle Money Into{" "}
-              <span className="text-primary">Overnight Income</span>
+              {t('hero.title')}{" "}
+              <span className="text-primary">{t('hero.titleHighlight')}</span>
             </h1>
             
             <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed" data-testid="text-hero-subtitle">
-              Automatically invest your spare cash in overnight funds and wake up to earnings. Safe, simple, and powered by trusted banking partners.
+              {t('hero.subtitle')}
             </p>
             
             <div className="flex flex-wrap gap-4">
@@ -31,7 +34,7 @@ export default function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
                 onClick={onGetStarted}
                 data-testid="button-hero-start"
               >
-                Start Earning Tonight
+                {t('hero.ctaPrimary')}
               </Button>
               <Button 
                 size="lg" 
@@ -39,18 +42,18 @@ export default function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
                 className="text-base px-8"
                 data-testid="button-hero-learn"
               >
-                See How It Works
+                {t('hero.ctaSecondary')}
               </Button>
             </div>
             
             <div className="flex items-center gap-8 pt-4">
               <div className="flex items-center gap-2">
                 <Shield className="w-5 h-5 text-chart-3" />
-                <span className="text-sm text-muted-foreground">Bank-grade security</span>
+                <span className="text-sm text-muted-foreground">{t('hero.security')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <TrendingUp className="w-5 h-5 text-chart-3" />
-                <span className="text-sm text-muted-foreground">FDIC insured</span>
+                <span className="text-sm text-muted-foreground">{t('hero.insured')}</span>
               </div>
             </div>
           </div>
@@ -59,12 +62,12 @@ export default function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
             <div className="relative rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 p-8 backdrop-blur-sm border border-border/50 shadow-2xl" data-testid="card-hero-dashboard">
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-display text-2xl font-bold text-foreground">Your Earnings</h3>
+                  <h3 className="font-display text-2xl font-bold text-foreground">{t('hero.earnings')}</h3>
                   <div className="px-3 py-1 rounded-full bg-chart-3/10 text-chart-3 text-sm font-semibold">+12.3%</div>
                 </div>
                 
                 <div className="space-y-2">
-                  <p className="text-sm text-muted-foreground">Total Earned This Month</p>
+                  <p className="text-sm text-muted-foreground">{t('hero.totalEarned')}</p>
                   <p className="font-mono text-4xl font-bold text-foreground">$1,247.82</p>
                 </div>
                 
@@ -80,15 +83,15 @@ export default function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
                 
                 <div className="grid grid-cols-3 gap-4 pt-4">
                   <div className="space-y-1">
-                    <p className="text-xs text-muted-foreground">Daily Avg</p>
+                    <p className="text-xs text-muted-foreground">{t('hero.dailyAvg')}</p>
                     <p className="font-mono text-lg font-semibold text-foreground">$41.59</p>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-xs text-muted-foreground">Best Day</p>
+                    <p className="text-xs text-muted-foreground">{t('hero.bestDay')}</p>
                     <p className="font-mono text-lg font-semibold text-foreground">$87.20</p>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-xs text-muted-foreground">APY</p>
+                    <p className="text-xs text-muted-foreground">{t('hero.apy')}</p>
                     <p className="font-mono text-lg font-semibold text-chart-3">4.5%</p>
                   </div>
                 </div>

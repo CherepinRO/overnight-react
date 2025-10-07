@@ -1,6 +1,9 @@
 import { Github, Twitter, Linkedin } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer className="bg-background border-t border-border py-12">
       <div className="max-w-7xl mx-auto px-6">
@@ -8,7 +11,7 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="font-display text-xl font-bold text-foreground">Overnight</h3>
             <p className="text-sm text-muted-foreground">
-              Turn your idle money into overnight income with bank-grade security.
+              {t('footer.tagline')}
             </p>
             <div className="flex items-center gap-4">
               <a href="#" className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-twitter">
@@ -24,39 +27,39 @@ export default function Footer() {
           </div>
           
           <div>
-            <h4 className="font-semibold text-foreground mb-4">Product</h4>
+            <h4 className="font-semibold text-foreground mb-4">{t('footer.product')}</h4>
             <ul className="space-y-3">
-              <li><a href="#features" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Features</a></li>
-              <li><a href="#how-it-works" className="text-sm text-muted-foreground hover:text-foreground transition-colors">How It Works</a></li>
-              <li><a href="#pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Pricing</a></li>
+              <li><a href="#features" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t('nav.features')}</a></li>
+              <li><a href="#how-it-works" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t('nav.howItWorks')}</a></li>
+              <li><a href="#pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t('nav.pricing')}</a></li>
               <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Security</a></li>
             </ul>
           </div>
           
           <div>
-            <h4 className="font-semibold text-foreground mb-4">Company</h4>
+            <h4 className="font-semibold text-foreground mb-4">{t('footer.company')}</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">About</a></li>
-              <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Blog</a></li>
-              <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Careers</a></li>
-              <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Contact</a></li>
+              <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t('footer.about')}</a></li>
+              <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t('footer.blog')}</a></li>
+              <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t('footer.careers')}</a></li>
+              <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t('footer.contact')}</a></li>
             </ul>
           </div>
           
           <div>
-            <h4 className="font-semibold text-foreground mb-4">Legal</h4>
+            <h4 className="font-semibold text-foreground mb-4">{t('footer.legal')}</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Privacy</a></li>
-              <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Terms</a></li>
-              <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Compliance</a></li>
-              <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Disclosures</a></li>
+              <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t('footer.privacy')}</a></li>
+              <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t('footer.terms')}</a></li>
+              <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t('footer.compliance')}</a></li>
+              <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t('footer.disclosures')}</a></li>
             </ul>
           </div>
         </div>
         
         <div className="pt-8 border-t border-border text-center">
           <p className="text-sm text-muted-foreground">
-            © 2024 Overnight. All rights reserved. Member FDIC. Securities products are not FDIC insured.
+            {t('footer.copyright')}
           </p>
         </div>
       </div>

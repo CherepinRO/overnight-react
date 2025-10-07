@@ -1,0 +1,174 @@
+{
+  "nav": {
+    "features": "Features",
+    "howItWorks": "How It Works",
+    "pricing": "Pricing",
+    "signIn": "Sign In",
+    "getStarted": "Get Started"
+  },
+  "hero": {
+    "badge": "Earn while you sleep",
+    "title": "Turn Your Idle Money Into",
+    "titleHighlight": "Overnight Income",
+    "subtitle": "Automatically invest your spare cash in overnight funds and wake up to earnings. Safe, simple, and powered by trusted banking partners.",
+    "ctaPrimary": "Start Earning Tonight",
+    "ctaSecondary": "See How It Works",
+    "security": "Bank-grade security",
+    "insured": "FDIC insured",
+    "earnings": "Your Earnings",
+    "totalEarned": "Total Earned This Month",
+    "dailyAvg": "Daily Avg",
+    "bestDay": "Best Day",
+    "apy": "APY"
+  },
+  "features": {
+    "title": "Everything You Need to Grow Your Money",
+    "subtitle": "Powerful features designed to maximize your overnight earnings with minimal effort.",
+    "instantSetup": {
+      "title": "Instant Setup",
+      "description": "Connect your bank account and start earning in under 2 minutes. No paperwork, no hassle."
+    },
+    "security": {
+      "title": "Bank-Grade Security",
+      "description": "Your funds are FDIC insured and protected with military-grade encryption."
+    },
+    "returns": {
+      "title": "Competitive Returns",
+      "description": "Earn up to 4.5% APY on overnight deposits, significantly higher than traditional savings."
+    },
+    "automated": {
+      "title": "24/7 Automated",
+      "description": "Our system works round the clock, automatically optimizing your returns every night."
+    },
+    "noMinimum": {
+      "title": "No Minimum Balance",
+      "description": "Start with any amount. Every dollar earns interest from day one."
+    },
+    "accessible": {
+      "title": "Always Accessible",
+      "description": "Withdraw your funds anytime without penalties or fees. Your money, your control."
+    }
+  },
+  "howItWorks": {
+    "title": "Start Earning in Three Simple Steps",
+    "subtitle": "Getting started takes less time than making your morning coffee.",
+    "step1": {
+      "title": "Connect Your Bank",
+      "description": "Securely link your bank account using our trusted banking partners. Your credentials are never stored."
+    },
+    "step2": {
+      "title": "Set Your Preferences",
+      "description": "Choose how much to invest each night. You can adjust or pause anytime with a single click."
+    },
+    "step3": {
+      "title": "Earn Automatically",
+      "description": "Wake up to earnings. Our AI optimizes overnight fund allocation for maximum returns every single night."
+    }
+  },
+  "pricing": {
+    "title": "Choose Your Plan",
+    "subtitle": "Start free, upgrade as you grow. All plans include FDIC insurance.",
+    "monthly": "Monthly",
+    "annual": "Annual",
+    "savePercent": "(Save 17%)",
+    "year": "year",
+    "month": "month",
+    "mostPopular": "Most Popular",
+    "startFree": "Start Free",
+    "getStarted": "Get Started",
+    "starter": {
+      "name": "Starter",
+      "description": "Perfect for trying out overnight investing",
+      "features": [
+        "Up to $10,000 balance",
+        "3.5% APY",
+        "Daily earnings reports",
+        "Mobile app access",
+        "Email support"
+      ]
+    },
+    "plus": {
+      "name": "Plus",
+      "description": "For serious savers and investors",
+      "features": [
+        "Up to $100,000 balance",
+        "4.0% APY",
+        "Real-time earnings tracking",
+        "Priority support",
+        "Advanced analytics",
+        "Tax optimization tools"
+      ]
+    },
+    "premium": {
+      "name": "Premium",
+      "description": "Maximum returns for high-value accounts",
+      "features": [
+        "Unlimited balance",
+        "4.5% APY",
+        "Dedicated account manager",
+        "Custom investment strategies",
+        "API access",
+        "White-glove service"
+      ]
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything you need to know about overnight investing.",
+    "q1": {
+      "question": "How does overnight investing work?",
+      "answer": "Every night, your idle cash is automatically invested in overnight money market funds. These are ultra-safe, liquid investments that earn interest overnight and are returned to your account each morning."
+    },
+    "q2": {
+      "question": "Is my money safe?",
+      "answer": "Absolutely. Your funds are FDIC insured up to $250,000 and protected with bank-grade encryption. We partner with regulated financial institutions and never have direct access to your money."
+    },
+    "q3": {
+      "question": "Can I withdraw my money anytime?",
+      "answer": "Yes! Your funds are available 24/7. You can withdraw any amount at any time without penalties or fees. Funds typically arrive in your bank account within 1-2 business days."
+    },
+    "q4": {
+      "question": "What's the minimum balance required?",
+      "answer": "There's no minimum balance for our Starter plan. You can start with as little as $1 and still earn overnight interest. Higher tiers offer better rates and features for larger balances."
+    },
+    "q5": {
+      "question": "How are taxes handled?",
+      "answer": "We provide detailed tax reports and integrate with popular tax software. Plus and Premium members get access to tax optimization tools that help minimize your tax burden legally."
+    },
+    "q6": {
+      "question": "What makes this different from a savings account?",
+      "answer": "Traditional savings accounts offer minimal interest (often under 0.5% APY). We leverage overnight money market funds to provide significantly higher returns (up to 4.5% APY) while maintaining the same safety and accessibility."
+    }
+  },
+  "footer": {
+    "tagline": "Turn your idle money into overnight income with bank-grade security.",
+    "product": "Product",
+    "company": "Company",
+    "legal": "Legal",
+    "about": "About",
+    "blog": "Blog",
+    "careers": "Careers",
+    "contact": "Contact",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "compliance": "Compliance",
+    "disclosures": "Disclosures",
+    "copyright": "© 2024 Overnight. All rights reserved. Member FDIC. Securities products are not FDIC insured."
+  },
+  "auth": {
+    "welcomeBack": "Welcome Back",
+    "createAccount": "Create Account",
+    "signInSubtitle": "Sign in to continue to your dashboard",
+    "signUpSubtitle": "Start earning overnight income in minutes",
+    "continueWithGoogle": "Continue with Google",
+    "orContinueWith": "Or continue with email",
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign In",
+    "createAccountButton": "Create Account",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?",
+    "signUp": "Sign up",
+    "signInLink": "Sign in"
+  }
+}
