@@ -83,10 +83,10 @@ export default function Dashboard() {
             Getting Started
           </h2>
           <p className="text-muted-foreground mb-4">
-            Connect your bank account to start earning overnight income automatically.
+            Link your bank cards to start earning overnight income automatically.
           </p>
-          <Button data-testid="button-connect-bank">
-            Connect Bank Account
+          <Button onClick={() => setLocation('/cards')} data-testid="button-manage-cards">
+            Manage Cards
           </Button>
         </Card>
       </div>

@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Landing from "@/pages/Landing";
 import Onboarding from "@/pages/Onboarding";
 import Dashboard from "@/pages/Dashboard";
+import Cards from "@/pages/Cards";
 import NotFound from "@/pages/not-found";
 import { useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
@@ -40,6 +41,9 @@ function Router() {
       <Route path="/onboarding" component={Onboarding} />
       <Route path="/dashboard">
         {() => <ProtectedRoute component={Dashboard} />}
+      </Route>
+      <Route path="/cards">
+        {() => <ProtectedRoute component={Cards} />}
       </Route>
       <Route component={NotFound} />
     </Switch>
