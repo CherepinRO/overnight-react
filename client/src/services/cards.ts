@@ -28,6 +28,11 @@ export async function getCards(userId: string): Promise<Card[]> {
   // Simulate network delay
   await new Promise(resolve => setTimeout(resolve, 500));
   
+  if (!db) {
+    console.warn('Firebase not configured, returning empty cards array');
+    return [];
+  }
+  
   try {
     const cardsRef = collection(db, 'users', userId, 'cards');
     const querySnapshot = await getDocs(cardsRef);
@@ -49,6 +54,11 @@ export async function addCard(userId: string): Promise<Card> {
   await new Promise(resolve => setTimeout(resolve, 500));
   
   const newCard = generateMockCard(userId);
+  
+  if (!db) {
+    console.warn('Firebase not configured, returning mock card without saving');
+    return newCard;
+  }
   
   try {
     const cardRef = doc(db, 'users', userId, 'cards', newCard.id);

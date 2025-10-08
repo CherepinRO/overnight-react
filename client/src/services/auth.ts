@@ -10,16 +10,31 @@ import {
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: `${import.meta.env.VITE_FIREBASE_PROJECT_ID}.firebaseapp.com`,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: `${import.meta.env.VITE_FIREBASE_PROJECT_ID}.firebasestorage.app`,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "",
+  authDomain: `${import.meta.env.VITE_FIREBASE_PROJECT_ID || "demo-project"}.firebaseapp.com`,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "",
+  storageBucket: `${import.meta.env.VITE_FIREBASE_PROJECT_ID || "demo-project"}.firebasestorage.app`,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "",
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
+// Check if Firebase is properly configured
+const isFirebaseConfigured = !!(
+  import.meta.env.VITE_FIREBASE_API_KEY &&
+  import.meta.env.VITE_FIREBASE_PROJECT_ID &&
+  import.meta.env.VITE_FIREBASE_APP_ID
+);
+
+let app: any = null;
+let auth: any = null;
+let db: any = null;
+
+if (isFirebaseConfigured) {
+  app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+  db = getFirestore(app);
+}
+
+export { auth, db };
 
 const provider = new GoogleAuthProvider();
 
@@ -30,6 +45,10 @@ interface UserProfile {
 }
 
 export async function signInWithGoogle(): Promise<User> {
+  if (!isFirebaseConfigured) {
+    throw new Error('Firebase is not configured. Please add Firebase credentials to your environment.');
+  }
+
   try {
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
@@ -59,6 +78,11 @@ export async function signInWithGoogle(): Promise<User> {
 }
 
 export async function signOut(): Promise<void> {
+  if (!isFirebaseConfigured) {
+    localStorage.removeItem('idToken');
+    return;
+  }
+
   try {
     await firebaseSignOut(auth);
     localStorage.removeItem('idToken');
@@ -69,10 +93,19 @@ export async function signOut(): Promise<void> {
 }
 
 export function onAuthStateChange(callback: (user: User | null) => void) {
+  if (!isFirebaseConfigured || !auth) {
+    // Call callback with null if Firebase is not configured
+    callback(null);
+    return () => {}; // Return empty unsubscribe function
+  }
   return onAuthStateChanged(auth, callback);
 }
 
 export async function getUserProfile(uid: string): Promise<UserProfile | null> {
+  if (!isFirebaseConfigured) {
+    return null;
+  }
+
   try {
     const userRef = doc(db, 'users', uid, 'profile', 'data');
     const userDoc = await getDoc(userRef);
