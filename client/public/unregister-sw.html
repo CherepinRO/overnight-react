@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unregister Service Worker</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .status {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Service Worker Unregister Tool</h1>
+    <p>This page will unregister the service worker and clear all caches.</p>
+    
+    <div id="status"></div>
+    
+    <button onclick="unregisterServiceWorker()">Unregister Service Worker & Clear Cache</button>
+    
+    <script>
+        async function unregisterServiceWorker() {
+            const statusDiv = document.getElementById('status');
+            
+            try {
+                if ('serviceWorker' in navigator) {
+                    const registrations = await navigator.serviceWorker.getRegistrations();
+                    
+                    if (registrations.length === 0) {
+                        statusDiv.innerHTML = '<div class="error">No service workers found.</div>';
+                        return;
+                    }
+                    
+                    for (const registration of registrations) {
+                        await registration.unregister();
+                    }
+                    
+                    // Clear all caches
+                    const cacheNames = await caches.keys();
+                    await Promise.all(cacheNames.map(name => caches.delete(name)));
+                    
+                    statusDiv.innerHTML = `
+                        <div class="success">
+                            <h3>✅ Success!</h3>
+                            <p>Service worker unregistered and caches cleared.</p>
+                            <p><strong>Next steps:</strong></p>
+                            <ol>
+                                <li>Close this tab</li>
+                                <li>Close all tabs with your app open</li>
+                                <li>Open your app in a fresh tab</li>
+                                <li>Press Ctrl+Shift+R (or Cmd+Shift+R on Mac) to hard refresh</li>
+                            </ol>
+                        </div>
+                    `;
+                } else {
+                    statusDiv.innerHTML = '<div class="error">Service Workers not supported in this browser.</div>';
+                }
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+            }
+        }
+        
+        // Auto-check on page load
+        window.addEventListener('load', async () => {
+            if ('serviceWorker' in navigator) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                const statusDiv = document.getElementById('status');
+                
+                if (registrations.length > 0) {
+                    statusDiv.innerHTML = `
+                        <div class="error">
+                            <strong>⚠️ ${registrations.length} service worker(s) found!</strong><br>
+                            Click the button below to unregister.
+                        </div>
+                    `;
+                } else {
+                    statusDiv.innerHTML = '<div class="success">✅ No service workers registered.</div>';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
