@@ -4,11 +4,14 @@
  * This file contains scheduled functions that:
  * 1. Schedule overnight investments at 22:00 MSK
  * 2. Redeem matured investments at 07:00 MSK
+ * 3. Create Stripe checkout sessions for premium subscriptions
  */
 
 const {onSchedule} = require("firebase-functions/v2/scheduler");
+const {onCall} = require("firebase-functions/v2/https");
 const admin = require("firebase-admin");
 const axios = require("axios");
+const Stripe = require("stripe");
 
 // Initialize Firebase Admin SDK
 admin.initializeApp();
@@ -400,3 +403,96 @@ exports.testRedeemOvernight = require("firebase-functions").https.onRequest(
     }
   }
 );
+
+/**
+ * Callable Cloud Function: Create Stripe Checkout Session
+ * 
+ * Creates a Stripe checkout session for premium subscription
+ * 
+ * Parameters:
+ * @param {string} priceId - Stripe price ID (monthly or yearly)
+ * 
+ * Returns:
+ * @param {string} sessionId - Stripe checkout session ID for redirect
+ * 
+ * Usage from client:
+ * const createCheckoutSession = httpsCallable(functions, 'createCheckoutSession');
+ * const { data } = await createCheckoutSession({ priceId: 'price_xxx' });
+ * redirectToCheckout(data.sessionId);
+ */
+exports.createCheckoutSession = onCall(async (request) => {
+  const functions = require("firebase-functions");
+
+  // Check if user is authenticated
+  if (!request.auth) {
+    throw new functions.https.HttpsError(
+      "unauthenticated",
+      "User must be authenticated to create checkout session"
+    );
+  }
+
+  const userId = request.auth.uid;
+  const {priceId} = request.data;
+
+  if (!priceId) {
+    throw new functions.https.HttpsError(
+      "invalid-argument",
+      "Price ID is required"
+    );
+  }
+
+  try {
+    // Initialize Stripe with secret key
+    const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+    
+    if (!stripeSecretKey) {
+      throw new functions.https.HttpsError(
+        "failed-precondition",
+        "Stripe is not configured on the server"
+      );
+    }
+
+    const stripe = new Stripe(stripeSecretKey, {
+      apiVersion: "2023-10-16",
+    });
+
+    // Get user email from Firebase Auth
+    const userRecord = await admin.auth().getUser(userId);
+    const userEmail = userRecord.email;
+
+    // Create Stripe Checkout Session
+    const session = await stripe.checkout.sessions.create({
+      mode: "subscription",
+      payment_method_types: ["card"],
+      line_items: [
+        {
+          price: priceId,
+          quantity: 1,
+        },
+      ],
+      customer_email: userEmail,
+      client_reference_id: userId,
+      success_url: `${process.env.APP_URL || "http://localhost:5000"}/stripe-success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.APP_URL || "http://localhost:5000"}/dashboard`,
+      subscription_data: {
+        metadata: {
+          userId: userId,
+        },
+      },
+    });
+
+    functions.logger.info(
+      `Created checkout session ${session.id} for user ${userId}`
+    );
+
+    return {
+      sessionId: session.id,
+    };
+  } catch (error) {
+    functions.logger.error("Error creating checkout session:", error);
+    throw new functions.https.HttpsError(
+      "internal",
+      `Failed to create checkout session: ${error.message}`
+    );
+  }
+});
