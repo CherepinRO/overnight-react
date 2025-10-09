@@ -1,6 +1,6 @@
 import { Card } from '@/types/Card';
 import { db } from './auth';
-import { collection, doc, setDoc, getDocs, query, where } from 'firebase/firestore';
+import { collection, doc, setDoc, getDocs, updateDoc } from 'firebase/firestore';
 
 const MOCK_BANKS = [
   { name: 'Chase Bank', icon: '🏦' },
@@ -68,11 +68,30 @@ export async function addCard(userId: string): Promise<Card> {
       balance: newCard.balance,
       icon: newCard.icon,
       userId: newCard.userId,
+      overnight: false,
+      reserved: 0,
     });
     
-    return newCard;
+    return { ...newCard, overnight: false, reserved: 0 };
   } catch (error) {
     console.error('Error adding card:', error);
+    throw error;
+  }
+}
+
+export async function toggleOvernightStatus(userId: string, cardId: string, enabled: boolean): Promise<void> {
+  if (!db) {
+    console.warn('Firebase not configured, cannot toggle overnight status');
+    return;
+  }
+  
+  try {
+    const cardRef = doc(db, 'users', userId, 'cards', cardId);
+    await updateDoc(cardRef, {
+      overnight: enabled,
+    });
+  } catch (error) {
+    console.error('Error toggling overnight status:', error);
     throw error;
   }
 }

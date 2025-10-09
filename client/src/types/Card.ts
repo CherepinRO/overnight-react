@@ -5,4 +5,6 @@ export interface Card {
   balance: number;
   icon: string;
   userId: string;
+  overnight?: boolean;
+  reserved?: number;
 }
