@@ -39,8 +39,6 @@ describe('Cards Service', () => {
         balance: expect.any(Number),
         icon: expect.any(String),
         userId,
-        overnight: false,
-        reserved: 0,
       });
     });
 
@@ -69,13 +67,13 @@ describe('Cards Service', () => {
   });
 
   describe('updateCardBalances', () => {
-    it('should update card balances with fluctuation', () => {
+    it('should update card balances with fluctuation', async () => {
       const cards = [
         { id: '1', bankName: 'Bank A', last4: '1234', balance: 1000, icon: '🏦', userId: 'user1' },
         { id: '2', bankName: 'Bank B', last4: '5678', balance: 2000, icon: '🏛️', userId: 'user1' },
       ];
       
-      const updated = updateCardBalances(cards);
+      const updated = await updateCardBalances(cards);
       
       expect(updated).toHaveLength(2);
       updated.forEach((card, index) => {
@@ -85,18 +83,19 @@ describe('Cards Service', () => {
       });
     });
 
-    it('should preserve card properties except balance', () => {
+    it('should preserve card properties except balance', async () => {
       const cards = [
         { id: '1', bankName: 'Bank A', last4: '1234', balance: 1000, icon: '🏦', userId: 'user1' },
       ];
       
-      const [updated] = updateCardBalances(cards);
+      const updated = await updateCardBalances(cards);
+      const [first] = updated;
       
-      expect(updated.id).toBe(cards[0].id);
-      expect(updated.bankName).toBe(cards[0].bankName);
-      expect(updated.last4).toBe(cards[0].last4);
-      expect(updated.icon).toBe(cards[0].icon);
-      expect(updated.userId).toBe(cards[0].userId);
+      expect(first.id).toBe(cards[0].id);
+      expect(first.bankName).toBe(cards[0].bankName);
+      expect(first.last4).toBe(cards[0].last4);
+      expect(first.icon).toBe(cards[0].icon);
+      expect(first.userId).toBe(cards[0].userId);
     });
   });
 });

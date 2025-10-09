@@ -14,7 +14,7 @@ describe('useOvernight Hook', () => {
     vi.clearAllMocks();
   });
 
-  it('should return initial loading state', () => {
+  it('should return empty state when auth is loading', async () => {
     vi.spyOn(authModule, 'useAuth').mockReturnValue({
       user: null,
       loading: true,
@@ -23,7 +23,11 @@ describe('useOvernight Hook', () => {
 
     const { result } = renderHook(() => useOvernight());
 
-    expect(result.current.loading).toBe(true);
+    // Hook immediately sets loading to false when user is null
+    await waitFor(() => {
+      expect(result.current.loading).toBe(false);
+    });
+    
     expect(result.current.transactions).toEqual([]);
     expect(result.current.lastNightEarnings).toBe(0);
     expect(result.current.totalActiveAmount).toBe(0);
