@@ -38,11 +38,29 @@ export default function Onboarding() {
       await signInWithGoogle();
       localStorage.setItem('firstLaunch', 'false');
       setLocation('/dashboard');
-    } catch (error) {
+    } catch (error: any) {
+      console.error('Google Sign-In Error:', error);
+      
+      let errorMessage = "Failed to sign in with Google. Please try again.";
+      
+      // Provide specific error messages based on Firebase error codes
+      if (error?.code === 'auth/unauthorized-domain') {
+        errorMessage = "This domain is not authorized. Please add your Replit URL to Firebase Console > Authentication > Settings > Authorized domains.";
+      } else if (error?.code === 'auth/popup-blocked') {
+        errorMessage = "Pop-up was blocked by your browser. Please allow pop-ups for this site and try again.";
+      } else if (error?.code === 'auth/popup-closed-by-user') {
+        errorMessage = "Sign-in cancelled. Please try again.";
+      } else if (error?.code === 'auth/operation-not-allowed') {
+        errorMessage = "Google sign-in is not enabled. Please enable it in Firebase Console > Authentication > Sign-in method.";
+      } else if (error?.message) {
+        errorMessage = error.message;
+      }
+      
       toast({
         title: "Sign In Failed",
-        description: "Failed to sign in with Google. Please try again.",
+        description: errorMessage,
         variant: "destructive",
+        duration: 8000, // Show error longer for complex messages
       });
     }
   };
